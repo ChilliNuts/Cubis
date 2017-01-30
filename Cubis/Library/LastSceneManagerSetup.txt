@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Working Prototype/Game.unity
+- path: Assets/Array Test/ArrayTest.unity
   isLoaded: 1
   isActive: 1

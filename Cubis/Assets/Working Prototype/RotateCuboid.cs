@@ -4,6 +4,7 @@ using System.Collections;
 
 public class RotateCuboid : MonoBehaviour {
 
+
 		PlayManager playManager;
 
 
@@ -75,7 +76,7 @@ public class RotateCuboid : MonoBehaviour {
 	
 	void Update()
 	{
-		const float rotationTime = 0.3f;
+		const float rotationTime = 0.5f;
 		if (rotating) {
 			rotationTimer += Time.deltaTime;
 			if (rotationTimer >= rotationTime) {

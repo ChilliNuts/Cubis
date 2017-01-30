@@ -11,9 +11,9 @@ public class PlayManager : MonoBehaviour {
 	List<Cube> matchedList = new List<Cube>();
 	List<Cube> matchMaking = new List<Cube>();
 	int amountToMatch = 3;
-	bool isMatching = false;
+	public bool isMatching = false;
 	bool matchFound = false;
-	Cube lastCube;
+	public Cube lastCube;
 	Vector3 cube1Start, cube1End, cube2Start, cube2End;
 	Cube cube1, cube2;
 	public bool isSwapping = false;
@@ -34,6 +34,7 @@ public class PlayManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		print(isMatching);
 		if (isMatching){
 			PlayManager.lockInput = true;
 			Invoke ("CheckForMatches", matchTimer);
@@ -102,7 +103,7 @@ public class PlayManager : MonoBehaviour {
 
 	void CheckForMatches(){
 
-		CreatePlayableArea ();
+		//CreatePlayableArea ();
 
 		foreach(Cube cube in seenCubes){
 
@@ -126,7 +127,7 @@ public class PlayManager : MonoBehaviour {
 			DestroyMatchedCubes ();
 			matchTimer = 0.75f;
 		}else isMatching = false;
-
+		print("checked for matches");
 	}
 
 	void FinalizeMatches (){
@@ -193,12 +194,22 @@ public class PlayManager : MonoBehaviour {
 				Vector3 sight = new Vector3(c.transform.position.x, c.transform.position.y, -10);
 				Vector3 dir = c.transform.position - sight;
 				RaycastHit hit;
-				if(Physics.Raycast (sight, dir, out hit, 1000f) && hit.transform == c.transform){
+				if(Physics.Raycast (sight, dir, out hit, 10000f) && hit.transform == c.transform){
 					seenCubes.Add (c);
 				}
 			}
 		}
 		isMatching = true;
 		matchFound = false;
+		print("created play area");
+		print(seenCubes.Count);
+	}
+
+	public void DeselectCube(){
+		if (lastCube != null) {
+			lastCube.ToggleSelector ();
+			lastCube = null;
+			print("deselcted");
+		}
 	}
 }
